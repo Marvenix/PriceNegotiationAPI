@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PriceNegotiationAPI.AutoMapper;
 using PriceNegotiationAPI.Database;
 using PriceNegotiationAPI.Middleware;
 using PriceNegotiationAPI.Model;
@@ -17,7 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -26,7 +27,10 @@ builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
 
-builder.Services.AddScoped<IUserService, UserService<IdentityUser>>();
+builder.Services.AddScoped<IUserService, UserService<ApplicationUser>>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 

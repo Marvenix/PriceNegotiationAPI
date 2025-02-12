@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
+using PriceNegotiationAPI.Model;
 using System.Text.Json;
 
 namespace PriceNegotiationAPI.Middleware
@@ -13,7 +14,7 @@ namespace PriceNegotiationAPI.Middleware
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context, UserManager<IdentityUser> userManager)
+        public async Task InvokeAsync(HttpContext context, UserManager<ApplicationUser> userManager)
         {
             if (context.Request.Path.Equals("/User/login", StringComparison.OrdinalIgnoreCase) && context.Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase))
             {

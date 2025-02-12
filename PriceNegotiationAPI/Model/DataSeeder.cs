@@ -6,7 +6,7 @@ namespace PriceNegotiationAPI.Model
     {
         public static async Task SeedUsers(IServiceScope scope)
         {
-            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             if (!await roleManager.RoleExistsAsync("User"))
@@ -24,14 +24,14 @@ namespace PriceNegotiationAPI.Model
 
             if (defaultUser == null)
             {
-                defaultUser = new IdentityUser { UserName = "default@user.com", Email = "default@user.com" };
+                defaultUser = new ApplicationUser { UserName = "default@user.com", Email = "default@user.com" };
                 await userManager.CreateAsync(defaultUser, "Password123!");
                 await userManager.AddToRoleAsync(defaultUser, "User");
             }
 
             if (defaultEmployee == null)
             {
-                defaultEmployee = new IdentityUser { UserName = "default@employee.com", Email = "default@employee.com" };
+                defaultEmployee = new ApplicationUser { UserName = "default@employee.com", Email = "default@employee.com" };
                 await userManager.CreateAsync(defaultEmployee, "Password123!");
                 await userManager.AddToRoleAsync(defaultEmployee, "Employee");
             }
