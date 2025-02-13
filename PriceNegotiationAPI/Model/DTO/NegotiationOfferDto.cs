@@ -1,10 +1,8 @@
-﻿using PriceNegotiationAPI.Enums;
-
-namespace PriceNegotiationAPI.Model
+﻿namespace PriceNegotiationAPI.Model.DTO
 {
-    public class NegotiationOffer
+    public class NegotiationOfferDto
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string? Id { get; set; }
         public required string NegotiationId { get; set; }
         public required Negotiation Negotiation { get; set; }
         public decimal Price { get; set; }

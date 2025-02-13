@@ -7,6 +7,7 @@ using PriceNegotiationAPI.Middleware;
 using PriceNegotiationAPI.Model;
 using PriceNegotiationAPI.Services;
 using System.Security.Claims;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,11 +25,17 @@ builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
 
 
 builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+});
 
 builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<IUserService, UserService<ApplicationUser>>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<INegotiationService, NegotiationService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 

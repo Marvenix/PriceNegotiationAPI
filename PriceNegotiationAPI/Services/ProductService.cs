@@ -48,7 +48,7 @@ namespace PriceNegotiationAPI.Services
 
         public async Task<ProductDto?> GetProductAsync(string productId)
         {
-            var product = await _context.Products.SingleOrDefaultAsync(p => p.Id == productId);
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productId);
             return _mapper.Map<ProductDto>(product);
         }
     }

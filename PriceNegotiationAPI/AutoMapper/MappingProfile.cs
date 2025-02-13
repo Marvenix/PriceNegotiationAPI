@@ -9,6 +9,8 @@ namespace PriceNegotiationAPI.AutoMapper
         public MappingProfile()
         {
             CreateMap<Product, ProductDto>();
+            CreateMap<Negotiation, NegotiationDto>();
+            CreateMap<NegotiationOffer, NegotiationOfferDto>();
         }
     }
 }
